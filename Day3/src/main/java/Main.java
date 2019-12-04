@@ -18,6 +18,7 @@ public class Main {
             }
         }
         final String[] input = sb.toString().split(",");
+        Utils.preparePlan(input);
         System.out.println();
     }
 }
