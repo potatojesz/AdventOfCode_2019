@@ -1,16 +1,63 @@
+package days.impl;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public final class WireUtils {
+import com.google.common.io.Resources;
+import days.Day;
+import days.InjectDay;
+import models.Point;
+import org.apache.commons.lang3.StringUtils;
 
+@InjectDay
+public class Day3 implements Day {
     public static final char R = 'R';
     public static final char L = 'L';
     public static final char U = 'U';
     public static final char D = 'D';
 
-    private WireUtils() {
+    @Override
+    public int execute() {
+        return distance((List<String>) input());
+    }
+
+    @Override
+    public Object input() {
+        List<String> wires = new ArrayList<String>();
+        try(InputStream stream = Resources.getResource("input_day3.txt").openStream()) {
+            try {
+                try(BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        if(StringUtils.isNotBlank(line)) {
+                            wires.add(line);
+                        }
+                    }
+                }
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return wires;
+    }
+
+    @Override
+    public String toString() {
+        String result = "Day3 Answer: " + String.valueOf(execute());
+        Logger.getGlobal().log(Level.INFO, result);
+
+        return result;
     }
 
     public static int distance(List<String> input) {
