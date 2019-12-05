@@ -1,5 +1,7 @@
 package days.impl;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,12 +9,12 @@ import days.Day;
 import days.InjectDay;
 
 @InjectDay
-public class Day4 implements Day {
+public class Day4_2 implements Day {
 
     public static int howManyPasswords(int min, int max) {
         int counter = 0;
         for(int i = min; i <= max; i++) {
-            if(checkIncrease(i) && checkAtLeastTwoSameDigits(i)) {
+            if(checkIncrease(i) && checkIfThereAreTwoSameDigits(i)) {
                 counter++;
             }
         }
@@ -20,18 +22,23 @@ public class Day4 implements Day {
         return counter;
     }
 
-    public static boolean checkAtLeastTwoSameDigits(int number) {
+    public static boolean checkIfThereAreTwoSameDigits(int number) {
         String string = String.valueOf(number);
         int last = Integer.parseInt(String.valueOf(string.charAt(0)));
+        Set<Integer> counters = new HashSet<>();
+        int counter = 1;
         for(int i = 1; i < string.length(); i++) {
             int next = Integer.parseInt(String.valueOf(string.charAt(i)));
             if(last == next) {
-                return true;
+                counter++;
+            } else {
+                counters.add(counter);
+                counter = 1;
             }
             last = next;
         }
-
-        return false;
+        counters.add(counter);
+        return counters.contains(2);
     }
 
     public static boolean checkIncrease(int number) {
@@ -61,7 +68,7 @@ public class Day4 implements Day {
 
     @Override
     public String toString() {
-        String result = "Day4 Answer: " + String.valueOf(execute());
+        String result = "Day4 Answer: " + execute();
         Logger.getGlobal().log(Level.INFO, result);
 
         return result;

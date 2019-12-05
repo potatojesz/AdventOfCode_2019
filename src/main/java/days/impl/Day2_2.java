@@ -55,7 +55,7 @@ public class Day2_2 implements Day {
                 int[] copy = Arrays.copyOf(originalInput, length);
                 copy[1] = i;
                 copy[2] = j;
-                if(calculate(copy) == 19690720) {
+                if(calculate(copy) == DESIRED) {
                     return 100 * i + j;
                 }
             }
