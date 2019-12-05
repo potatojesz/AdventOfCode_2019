@@ -85,7 +85,7 @@ public class Day2_2 implements Day {
 
     @Override
     public String toString() {
-        String result = "Day2 Answer: " + String.valueOf(execute());
+        String result = "Day2_2 Answer: " + String.valueOf(execute());
         Logger.getGlobal().log(Level.INFO, result);
 
         return result;

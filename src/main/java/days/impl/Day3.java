@@ -65,7 +65,7 @@ public class Day3 implements Day {
         final List<Point> intersections = getIntersections(input);
         for(Point point : intersections) {
             int newDist = manhatan(point.getX(), point.getY());
-            result = newDist < result ? newDist : result;
+            result = Math.min(newDist, result);
         }
         return result;
     }
